@@ -23,9 +23,9 @@
       <div class="col">
         <div class="card text-bg-dark shadow-sm">
           <% if list.photo.attached? %>
-            <%= cl_image_tag list.photo.key %>
+            <%= cl_image_tag list.photo.key, class:"card-img .img-fluid. max-width: 100%;", height: 400, crop: :fill%>
           <% else %>
-            <img src="https://source.unsplash.com/random/?movie" class="card-img" alt="Movie">
+            <img src="https://source.unsplash.com/random/?movie" class="card-img .img-fluid. max-width: 100%;" alt="Movie", height="400px", >
           <% end %>
             <div class="card-img-overlay d-flex justify-content-center align-items-center">
             <%= link_to list.name, list_path(list), class:"btn btn-dark"%>

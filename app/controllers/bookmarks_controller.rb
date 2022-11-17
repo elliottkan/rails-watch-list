@@ -5,13 +5,19 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    @bookmark = Bookmark.new(bookmark_params)
-    @bookmark.list = List.find(params[:list_id])
-    if @bookmark.save!
-      redirect_to list_path(params[:list_id])
-    else
-      render :new, status: :unprocessable_entity
+    # id = params[:bookmark][:movie]
+    movie_id_array = params[:bookmark][:movie]
+    comment = bookmark_params[:comment]
+    movie_id_array.each do |movie_id|
+      @bookmark = Bookmark.new(comment: comment, movie_id: movie_id)
+      @bookmark.list = List.find(params[:list_id])
+      @bookmark.save
     end
+    redirect_to list_path(params[:list_id])
+    # if
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
   end
 
   def destroy
@@ -23,6 +29,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:comment, :movie_id)
+    params.require(:bookmark).permit(:comment)
   end
 end
